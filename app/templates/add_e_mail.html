@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Добавление e_mail</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{  form.e_mail.label }}<br>
+            {{  form.e_mail(size=32) }}<br>
+            {% for error in  form.e_mail.errors%}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.e_mail_comment.label }}<br>
+            {{ form.e_mail_comment(size=32) }}<br>
+            {% for error in  form.e_mail_comment.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>{{  form.submit() }}</p>
+    </form>
+    <form action={{url_for('show_contact', contact_id=contact_id)}} method="get">
+        <button>Отмена</button>
+    </form>
+
+{% endblock %}

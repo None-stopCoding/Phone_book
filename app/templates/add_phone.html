@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Добавление номера</h1>
+    <form action="" method="post">
+        {{ phone_form.hidden_tag() }}
+        <p>
+            {{  phone_form.phone_number.label }}<br>
+            {{  phone_form.phone_number(size=32) }}<br>
+            {% for error in  phone_form.phone_number.errors%}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ phone_form.phone_comment.label }}<br>
+            {{ phone_form.phone_comment(size=32) }}<br>
+            {% for error in  phone_form.phone_comment.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{  phone_form.submit() }}</p>
+    </form>
+    <form action={{url_for('show_contact', contact_id=contact_id)}} method="get">
+        <button>Отмена</button>
+    </form>
+
+{% endblock %}

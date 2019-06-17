@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Ваши контакты:</h1>
+    <form action={{url_for('add_contact')}} method="post">
+        <button>Добавить</button>
+    </form>
+    {% for contact in contacts %}
+    <table>
+        <tr>
+            <td>{{contact[2]}}</td>
+            <td> {{contact[3]}}</td>
+                {%if not contact[4]%}
+                <td> </td>
+                {% else %}
+                <td> {{contact[4].strftime('%d.%m.%Y')}}</td>
+                {% endif %}
+                {%if not contact[5]%}
+                <td> </td>
+                {% else %}
+                <td>{{contact[5]}}</td>
+                {% endif %}
+            <td>
+                <form action={{url_for('show_contact', contact_id=contact[0])}}>
+                <button>Просмотреть</button>
+                </form>
+            </td>
+            <td>
+                <form action={{url_for('edit_contact', contact_id=contact[0])}} method="post">
+                <button>Редактировать</button>
+                </form>
+            </td>
+            <td>
+                <form action={{url_for('del_contact', contact_id=contact[0])}} method="post">
+                <button>Удалить</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+{% endblock %}

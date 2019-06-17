@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Контакт:</h1>
+    <table>
+        <tr>
+            <td>{{contact.fist_name}}</td>
+            <td> {{contact.second_name}}</td>
+                {%if not contact.birth_date%}
+                <td> </td>
+                {% else %}
+                <td> {{contact.birth_date}}</td>
+                {% endif %}
+                {%if not contact.address%}
+                <td> </td>
+                {% else %}
+                <td>{{contact.address}}</td>
+                {% endif %}
+        </tr>
+    </table>
+    <h2>Телефоны:</h2>
+    <form action={{url_for('add_phone', contact_id=contact.id)}} method="post">
+        <button>Добавить</button>
+    </form>
+    <table>
+    {% for phone in phones %}
+        <tr>
+            <td>{{phone.phone_number}}</td>
+            {% if not phone.phone_comment %}
+                <td> </td>
+            {% else %}
+            <td> {{phone.phone_comment}}</td>
+            {% endif %}
+            <td>
+                <form action={{url_for('del_phone', phone_id=phone.id, contact_id=contact.id)}} method="post">
+                    <button>Удалить</button>
+                </form>
+            </td>
+        </tr>
+         {% endfor %}
+    </table>
+    <h2>Почты:</h2>
+    <form action={{url_for('add_e_mail', contact_id=contact.id)}} method="post">
+        <button>Добавить</button>
+    </form>
+    {% for e_mail in e_mails %}
+     <table>
+        <tr>
+            <td>{{e_mail.contact_e_mail }}</td>
+            {% if not e_mail.e_mail_comment %}
+                <td> </td>
+                {% else %}
+            <td> {{e_mail.e_mail_comment}}</td>
+            {% endif %}
+            <td>
+                <form action={{url_for('del_e_mail', e_mail_id=e_mail.id, contact_id=contact.id)}} method="post">
+                    <button>Удалить</button>
+                </form>
+            </td>
+        </tr>
+         {% endfor %}
+    </table>
+
+{% endblock %}
