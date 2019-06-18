@@ -1,6 +1,6 @@
 # Phone_book
 
-Для запуска проекта с localhost:
+Для запуска сервера:
 
 	1. Создать папку venv с виртуальным окружением (Если запускать проект с PyCharm он создаст ее автоматически)
 
@@ -14,4 +14,4 @@
 		- flask db migrate
 		- flask db upgrade
 		- flask run
-	4. Октрыть браузер на localhost и на том порту, где запуститься сервер (будет написано в консоли)
+	4. Запустить ngrok.exe и написать ngrok http your_port_where_machine_is_running
